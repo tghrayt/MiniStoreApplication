@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MiniStore</name>
+    </assembly>
+    <members>
+        <member name="M:MiniStore.Controllers.CategoryController.GetAllCategories">
+            <summary>
+            Retourne toute la liste des categories
+            </summary>
+            <returns>La liste des categories</returns>
+            <response code="200">Liste des catégories</response>
+            <response code="404">la liste introuvable</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si la liste est vide</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.GetCatgoryByID(System.Int32)">
+            <summary>
+            Retourne une catégorie selon l'id donné
+            </summary>
+            <returns>La catégorie demandée</returns>
+            <response code="200">Catégorie sélectionné</response>
+            <response code="404">la catégorie est introuvable</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.AddCategory(MiniStore.Dto.CategoryDto)">
+            <summary>
+            Ajouter une catégorie
+            </summary>
+            <returns>La catégorie ajoutée</returns>
+            <response code="201">Catégorie Ajoutée avec succès</response>
+            <response code="400">la catégorie est nulle</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si la catégorie est nulle ou l'un de ces champs null</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.DeleteCategory(System.Int32)">
+            <summary>
+            Retourne le status de l'action de catégorie à supprimer
+            </summary>
+            <returns>boolean</returns>
+            <response code="200">Catégorie suprimmée avec succès</response>
+            <response code="400">la catégorie n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.CategoryController.UpdateCategory(System.Int32,MiniStore.Dto.CategoryDto)">
+            <summary>
+            Retourne la catégorie synchronisée
+            </summary>
+            <returns>Category</returns>
+            <response code="200">Catégorie modifiée avec succès</response>
+            <response code="404">la catégorie n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.ProductController.GetAllProducts">
+            <summary>
+            Retourne toute la liste des Produits
+            </summary>
+            <returns>La liste des produits</returns>
+            <response code="200">Liste des produits</response>
+            <response code="404">la liste introuvable</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si la liste est vide</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.ProductController.GetProductByID(System.Int32)">
+            <summary>
+            Retourne un produit selon l'id donné
+            </summary>
+            <returns>Le produit demandé</returns>
+            <response code="200">Produit sélectionné</response>
+            <response code="404">le produit est introuvable</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si le produit n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.ProductController.AddProduct(MiniStore.Dto.ProductDto)">
+            <summary>
+            Ajouter un produit
+            </summary>
+            <returns>Le produit ajouté</returns>
+            <response code="201">Produit Ajouté avec succès</response>
+            <response code="400">le produit est null</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si le produit est null ou l'un de ces champs null</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.ProductController.DeleteProduct(System.Int32)">
+            <summary>
+            Retourne le status de l'action de produit à supprimer
+            </summary>
+            <returns>boolean</returns>
+            <response code="202">Produit suprimmé avec succès</response>
+            <response code="400">le produit n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si le produit n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.ProductController.UpdateProduct(System.Int32,MiniStore.Dto.ProductDto)">
+            <summary>
+            Retourne le produit synchronisée
+            </summary>
+            <returns>Category</returns>
+            <response code="204">Produit modifiée avec succès</response>
+            <response code="404">le produit n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si le produit n'existe pas</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.UserController.Register(MiniStore.Dto.UserForRegisterDto)">
+            <summary>
+            Retourne L'utilisateur enrégistré
+            </summary>
+            <returns>L'utilisateur enrégistré</returns>
+            <response code="201">L'utilisateur est enrégistré avec succès</response>
+            <response code="400">Cet utilisateur existe déja ou veillez saisir tous les champs</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si l'un des champs vide</exception>
+        </member>
+        <member name="M:MiniStore.Controllers.UserController.Login(MiniStore.Dto.UserForLoginDto)">
+            <summary>
+            Retourne le token d'utilisateur connecté
+            </summary>
+            <returns>Le token d'utilisateur connecté</returns>
+            <response code="200">Le token d'utilisateur connecté</response>
+            <response code="400">Cet utilisateur n'existe pas</response>
+            <response code="500">Oops! le service est indisponible pour le moment</response>
+            <exception>Déclanche une exception d'application si l'utilisateur n'existe pas</exception>
+        </member>
+    </members>
+</doc>
