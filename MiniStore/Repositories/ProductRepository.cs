@@ -44,7 +44,7 @@ namespace MiniStore.Repositories
 
         public IEnumerable<Product> GetAllProducts()
         {
-            return _storeContext.Products.ToList();
+            return _storeContext.Products.Include(product => product.category).ToList();
         }
 
         public async Task<Product> GetProductByID(int productId)

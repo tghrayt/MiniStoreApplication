@@ -68,7 +68,7 @@ namespace MiniStore.Controllers
         /// Retourne une catégorie selon l'id donné
         /// </summary>
         /// <returns>La catégorie demandée</returns>
-        /// <response code="200">Catégorie sélectionné</response>
+        /// <response code="200">Catégorie sélectionnée</response>
         /// <response code="404">la catégorie est introuvable</response>
         /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
