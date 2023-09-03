@@ -29,9 +29,7 @@ namespace MiniStore.Context
         {
             // configures one-to-many relationship
             modelBuilder.Entity<Product>()
-                .HasOne(e => e.category)
-                .WithMany(c => c.Products)
-                 .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(e => e.category);
         }
     }
 
