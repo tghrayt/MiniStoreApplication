@@ -9,6 +9,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using MiniStore.Configurations;
 using MiniStore.Context;
 using MiniStore.Repositories;
 using MiniStore.Services;
@@ -50,12 +52,8 @@ namespace MiniStore
                     });
             });
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
+            services.DependencyInjectionConfig();
+
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -67,7 +65,32 @@ namespace MiniStore
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 s.IncludeXmlComments(xmlPath);
+
+                s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please enter a valid token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                s.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type=ReferenceType.SecurityScheme,
+                                Id="Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                });
             });
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -98,10 +121,10 @@ namespace MiniStore
             {
                 // Production code ....!
             }
-            
 
-            
-            app.UseAuthentication();  
+
+
+            app.UseAuthentication();
             app.UseRouting();
             app.UseCors("AllowOrigin");
             app.UseAuthorization();
