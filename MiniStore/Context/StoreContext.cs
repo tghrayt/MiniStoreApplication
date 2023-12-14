@@ -16,7 +16,6 @@ namespace MiniStore.Context
         }
 
         public StoreContext()
-       
         {
 
         }
