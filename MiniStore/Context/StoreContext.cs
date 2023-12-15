@@ -26,7 +26,6 @@ namespace MiniStore.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // configures one-to-many relationship
             modelBuilder.Entity<Product>()
                 .HasOne(e => e.category);
         }
