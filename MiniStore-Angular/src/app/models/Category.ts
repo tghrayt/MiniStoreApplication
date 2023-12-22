@@ -1,4 +1,5 @@
-export class Category{
+export class Category
+{
     categoryId? :number;
     categoryName? :string;
 }
