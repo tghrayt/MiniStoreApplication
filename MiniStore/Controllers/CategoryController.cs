@@ -50,7 +50,7 @@ namespace MiniStore.Controllers
         {
             try
             {
-                _logger.LogInformation("Categories api Invoked (pour obtenir la liste des catégories) ...");
+                _logger.LogInformation("Categories api Invoked (pour obtenir la liste des catégories) ...!");
                 var categoriesTask = await _categoryService.GetAllCategories();
                 return Ok(categoriesTask);
             }
@@ -61,8 +61,6 @@ namespace MiniStore.Controllers
             }
 
         }
-
-
 
         /// <summary>
         /// Retourne une catégorie selon l'id donné
@@ -87,7 +85,6 @@ namespace MiniStore.Controllers
                 {
                     _logger.LogError("la categorie n'existe pas!!");
                     return new NotFoundResult();
-                    
                 }
                 return Ok(categorie);
             }
@@ -98,10 +95,6 @@ namespace MiniStore.Controllers
             }
 
         }
-
-
-
-
 
         /// <summary>
         /// Ajouter une catégorie
@@ -138,8 +131,6 @@ namespace MiniStore.Controllers
 
         }
 
-
-
         /// <summary>
         /// Retourne le status de l'action de catégorie à supprimer
         /// </summary>
@@ -174,8 +165,6 @@ namespace MiniStore.Controllers
             }
 
         }
-
-
 
         /// <summary>
         /// Retourne la catégorie synchronisée
