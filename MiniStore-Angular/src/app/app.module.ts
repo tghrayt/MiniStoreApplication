@@ -18,6 +18,7 @@ import { HandleErrorsInteceptor } from './helper/HandleErrorsInteceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { ProductComponent } from './compenents/product/product.component';
 import { AdminComponent } from './compenents/admin/admin.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { AdminComponent } from './compenents/admin/admin.component';
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-right',
-    })
+    }),
+    NgbModule
   ],
   providers: [
     {

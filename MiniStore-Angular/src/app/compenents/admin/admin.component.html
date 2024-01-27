@@ -1,249 +1,288 @@
 <div class="container-fluid layout-header">
-    <div class="card">
-      <div class="card-header">
-        
-        <h3>
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-shop" viewBox="0 0 16 16">
-            <path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z"/>
-          </svg> 
-          Mini Store
-        </h3>
-        
+  <div class="card">
+    <div class="card-header">
+
+      <h3>
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-shop"
+          viewBox="0 0 16 16">
+          <path
+            d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0V5.37a.5.5 0 0 0-.12-.325L12.27 2H3.73L1.12 5.045A.5.5 0 0 0 1 5.37v.255a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0zM1.5 8.5A.5.5 0 0 1 2 9v6h1v-5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v5h6V9a.5.5 0 0 1 1 0v6h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1V9a.5.5 0 0 1 .5-.5zM4 15h3v-5H4v5zm5-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3zm3 0h-2v3h2v-3z" />
+        </svg>
+        Mini Store
+      </h3>
+
+    </div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p>Espace Administrateur</p>
+        <footer class="blockquote-footer">developed by tghrayt with love 💙</footer>
+      </blockquote>
+    </div>
+  </div>
+  <br><br>
+  <div class="media-body">
+
+    <div class="row">
+      <div class="col-lg-11">
+        <h4>Liste des Produits</h4>
       </div>
-      <div class="card-body">
-        <blockquote class="blockquote mb-0">
-          <p>Espace Administrateur</p>
-          <footer class="blockquote-footer">developed by tghrayt with love 💙</footer>
-        </blockquote>
+      <div class="col-lg-1">
+        <a>
+          <span class="material-icons bg-success text-white  rounded btn">
+            add
+          </span>
+
+        </a>
       </div>
     </div>
-    <br><br>
-    <div class="media-body">
+    <br>
+    <div aria-labelledby="headingOne">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Date Création</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let produit of listProduct">
+              <tr>
+                <td>{{produit.productId}}</td>
+                <td>{{produit.productName}}</td>
+                <td>{{produit.productDescription}}</td>
+                <td>{{produit.productmanufacturing | date:'dd/MM/yyyy' }}</td>
+                <!-- <td><a  class="btn btn-danger" (click)="supprimerProduit(produit.productId)">Supprimer</a></td> -->
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    attr.data-bs-target="#delete{{produit.productId}}">Supprimer</button></td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    attr.data-bs-target="#update{{produit.productId}}">Modifier</button></td>
 
-      <div class="row">
-        <div class="col-lg-11">
-          <h4>Liste des Produits</h4>
-        </div>
-        <div class="col-lg-1">           
-          <a>
-            <span class="material-icons bg-success text-white  rounded btn">
-            add
-            </span>
-        
-        </a>
+              </tr>
+
+              <!-- Update product Modal -->
+              <div class="modal fade" id="update{{produit.productId}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <form #userName="ngForm" (ngSubmit)="updateProduit(produit)">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Détails de produit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div>
+
+                          <div class="col-md-12">
+                            <label for="inputlibelleupdate" class="form-label">Libellé de produit</label>
+                            <input type="text" class="form-control" id="inputlibelleupdate{{produit.productId}}"
+                              value="{{produit.productName}}">
+                          </div>
+
+                          <div class="col-12">
+                            <label for="inputDescriptionupdate" class="form-label">Description</label>
+                            <input type="text" class="form-control" id="inputDescriptionupdate{{produit.productId}}"
+                              value="{{produit.productDescription}}">
+                          </div>
+                          <div class="col-12">
+                            <label for="inputDateupdate" class="form-label">Date de création</label>
+                            <input type="text" class="form-control" id="inputDateupdate{{produit.productId}}"
+                              value="{{produit.productmanufacturing | date:'dd/MM/yyyy' }}">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" id="closeModal" class="btn btn-secondary"
+                          data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">
+                          Valider
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check" viewBox="0 0 16 16">
+                            <path
+                              d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+
+
+
+
+
+              <!-- Delete Product Modal -->
+              <div class="modal fade" id="delete{{produit.productId}}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg>
+                        Voulez vous supprimer ce produit
+                      </h5>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                      <a class="btn btn-danger" (click)="supprimerProduit(produit.productId)">
+                        Supprimer
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-trash-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tbody>
+          </table>
         </div>
       </div>
-      <br>
-      <div aria-labelledby="headingOne">
-        <div class="card shadow mb-4">
-          <div class="card-body">
-              <table class="table table-striped">
-                  <thead>
-                  <tr> <th>Id</th><th>Nom</th> <th>Description</th> <th>Date Création</th> </tr>
-                  </thead>
-                   <tbody *ngFor="let produit of listProduct">
-                      <tr >
-                          <td>{{produit.productId}}</td>
-                          <td>{{produit.productName}}</td>
-                          <td>{{produit.productDescription}}</td>
-                          <td>{{produit.productmanufacturing | date:'dd/MM/yyyy' }}</td>
-                          <!-- <td><a  class="btn btn-danger" (click)="supprimerProduit(produit.productId)">Supprimer</a></td> -->
-                          <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" attr.data-bs-target="#delete{{produit.productId}}">Supprimer</button></td>
-                          <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" attr.data-bs-target="#update{{produit.productId}}">Modifier</button></td>
-                        
-                      </tr> 
-
-                      <!-- Update product Modal -->
-                              <div class="modal fade" id="update{{produit.productId}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <form #userName="ngForm" (ngSubmit)="updateProduit(produit)"> 
-                                <div class="modal-dialog">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Détails de produit</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <div>                                 
-                                        
-                                          <div class="col-md-12">
-                                            <label for="inputlibelleupdate" class="form-label">Libellé de produit</label>
-                                            <input type="text" class="form-control"  id="inputlibelleupdate{{produit.productId}}" value="{{produit.productName}}">
-                                          </div>
-                                          
-                                          <div class="col-12">
-                                            <label for="inputDescriptionupdate" class="form-label">Description</label>
-                                            <input type="text" class="form-control" id="inputDescriptionupdate{{produit.productId}}" value="{{produit.productDescription}}">
-                                          </div>
-                                          <div class="col-12">
-                                            <label for="inputDateupdate" class="form-label">Date de création</label>
-                                            <input type="text" class="form-control" id="inputDateupdate{{produit.productId}}" value="{{produit.productmanufacturing | date:'dd/MM/yyyy' }}">
-                                          </div>
-                                    </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                      <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                      <button type="submit" class="btn btn-success">
-                                        Valider
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                          <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                                        </svg>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                                </form>
-                              </div>
-                              
-                              
-
-
-
-
-                                <!-- Delete Product Modal -->
-                                <div class="modal fade" id="delete{{produit.productId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-                                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                          </svg>
-                                          Voulez vous supprimer ce produit</h5>
-                                      </div>                                    
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                                        <a  class="btn btn-danger" (click)="supprimerProduit(produit.productId)">
-                                          Supprimer
-                                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                                          </svg>
-                                        </a>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                  </tbody>
-              </table>
-          </div>
-      </div>
-      </div>    
     </div>
-    
-    <br><br>
-    <div class="media-body">
-      <div class="row">
-        <div class="col-lg-11">
-          <h4>Liste des Categories</h4>
-        </div>
-        <div class="col-lg-1">           
-          <a  type="button" data-bs-toggle="modal" attr.data-bs-target="addCategoryModal">
-            <span  class="material-icons bg-success text-white  rounded btn">
+  </div>
+
+  <br><br>
+  <div class="media-body">
+    <div class="row">
+      <div class="col-lg-11">
+        <h4>Liste des Categories</h4>
+      </div>
+      <div class="col-lg-1">
+        <a type="button" data-bs-toggle="modal" attr.data-bs-target="addCategoryModal">
+          <span class="material-icons bg-success text-white  rounded btn">
             add
-            </span>
-        
+          </span>
+
         </a>
+      </div>
+    </div>
+    <br>
+    <div id="collapseTwo" aria-labelledby="headingTwo">
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nom</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let category of listCategory">
+              <tr>
+                <td>{{category.categoryId}}</td>
+                <td>{{category.categoryName}}</td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                    attr.data-bs-target="#deletecat{{category.categoryId}}">Supprimer</button></td>
+                <td><button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    attr.data-bs-target="#updatecat{{category.categoryId}}">Modifier</button></td>
+
+              </tr>
+
+              <!-- Update Category Modal -->
+              <div class="modal fade" id="updatecat{{category.categoryId}}" tabindex="-1"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <form #userName="ngForm" (ngSubmit)="updateCategory(category)">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelcat">Détails de catégorie</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <div>
+
+                          <div class="col-md-12">
+                            <label for="inputlibelleupdatecat" class="form-label">Libellé de catégorie</label>
+                            <input type="text" class="form-control" id="inputlibelleupdatecat{{category.categoryId}}"
+                              value="{{category.categoryName}}">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" id="closeModalcat" class="btn btn-secondary"
+                          data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">
+                          Valider
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-check" viewBox="0 0 16 16">
+                            <path
+                              d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+
+
+
+
+
+              <!-- Delete Category Modal -->
+              <div class="modal fade" id="deletecat{{category.categoryId}}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabelcat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                        </svg>
+                        Voulez vous supprimer cette catégorie
+                      </h5>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                      <a class="btn btn-danger" (click)="supprimerCategory(category.categoryId)">
+                        Supprimer
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-trash-fill" viewBox="0 0 16 16">
+                          <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </tbody>
+          </table>
         </div>
       </div>
-      <br>
-      <div id="collapseTwo" aria-labelledby="headingTwo">
-        <div class="card shadow mb-4">
-          <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                <tr> <th>Id</th><th>Nom</th> </tr>
-                </thead>
-                 <tbody *ngFor="let category of listCategory">
-                    <tr >
-                        <td>{{category.categoryId}}</td>
-                        <td>{{category.categoryName}}</td>
-                        <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" attr.data-bs-target="#deletecat{{category.categoryId}}">Supprimer</button></td>
-                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" attr.data-bs-target="#updatecat{{category.categoryId}}">Modifier</button></td>
-                      
-                    </tr> 
+    </div>
 
-                    <!-- Update Category Modal -->
-                            <div class="modal fade" id="updatecat{{category.categoryId}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <form #userName="ngForm" (ngSubmit)="updateCategory(category)"> 
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabelcat">Détails de catégorie</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div>                                 
-                                      
-                                        <div class="col-md-12">
-                                          <label for="inputlibelleupdatecat" class="form-label">Libellé de catégorie</label>
-                                          <input type="text" class="form-control"  id="inputlibelleupdatecat{{category.categoryId}}" value="{{category.categoryName}}">
-                                        </div>
-                                  </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" id="closeModalcat" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-success">
-                                      Valider
-                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-                                      </svg>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                              </form>
-                            </div>
-                            
-                            
+    <!-- Add Category Modal -->
+    <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabelCategoryAdd"
+      aria-hidden="true">
+      <form #userName="ngForm" (ngSubmit)="addCategory()">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabelCategoryAdd">Ajouter unr nouvelle catégorie</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div>
 
-
-
-
-                              <!-- Delete Category Modal -->
-                              <div class="modal fade" id="deletecat{{category.categoryId}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabelcat">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16">
-                                          <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                                        </svg>
-                                        Voulez vous supprimer cette catégorie</h5>
-                                    </div>                                    
-                                    <div class="modal-footer">
-                                      <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                                      <a  class="btn btn-danger" (click)="supprimerCategory(category.categoryId)">
-                                        Supprimer
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                                          <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                                        </svg>
-                                      </a>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                </tbody>
-            </table>
-        </div>
-        </div>
-      </div>
-
-      <!-- Add Category Modal -->
-     <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="exampleModalLabelCategoryAdd" aria-hidden="true">
-      <form #userName="ngForm" (ngSubmit)="addCategory()"> 
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabelCategoryAdd">Ajouter unr nouvelle catégorie</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div>                                 
-              
                 <div class="col-md-12">
                   <label for="inputlibelleCategoryAdd" class="form-label">Libellé de produit</label>
-                  <input type="text" class="form-control"  id="inputlibelleCategoryAdd" value="">
+                  <input type="text" class="form-control" id="inputlibelleCategoryAdd" value="">
                 </div>
-                
+
                 <div class="col-12">
                   <label for="inputDescriptionCategoryAdd" class="form-label">Description</label>
                   <input type="text" class="form-control" id="inputDescriptionCategoryAdd" value="">
@@ -252,25 +291,27 @@
                   <label for="inputDateCategoryAdd" class="form-label">Date de création</label>
                   <input type="text" class="form-control" id="inputDateCategoryAdd" value="">
                 </div>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-success">
-              Valider
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
-                <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
-              </svg>
-            </button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" id="closeModal" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-success">
+                Valider
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
       </form>
     </div>
 
 
 
 
- 
-    </div>
+
+  </div>
 </div>
