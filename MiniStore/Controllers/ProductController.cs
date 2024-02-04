@@ -8,7 +8,6 @@ using MiniStore.Models;
 using MiniStore.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace MiniStore.Controllers
@@ -31,12 +30,8 @@ namespace MiniStore.Controllers
             _productService = productService;
             _mapper = mapper;
             _logger = logger;
-            _logger.LogInformation("Products controller Invoked ...");
+            _logger.LogInformation($"Products controller Invoked ...");
         }
-
-
-
-
 
         /// <summary>
         /// Retourne toute la liste des Produits
@@ -56,22 +51,17 @@ namespace MiniStore.Controllers
         {
             try
             {
-                _logger.LogInformation("products api Invoked (pour obtenir la liste des produits) ...");
+                _logger.LogInformation($"products api Invoked (pour obtenir la liste des produits) ...");
                 var products = _productService.GetAllProducts();
                 return StatusCode(200, products);
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de récuperation des produits, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
 
         }
-
-
-
-
-
 
         /// <summary>
         /// Retourne un produit selon l'id donné
@@ -91,19 +81,19 @@ namespace MiniStore.Controllers
         {
             try
             {
-                _logger.LogInformation("products/id api Invoked (pour obtenir le produit demandée) ...");
+                _logger.LogInformation($"products/id api Invoked (pour obtenir le produit demandée) ...");
                 var produit = await _productService.GetProductByID(id);
                 var produitDto = _mapper.Map<ProductDto>(produit);
                 if(produitDto == null)
                 {
-                    _logger.LogError("Ce produit n'existe pas!!");
+                    _logger.LogError($"Ce produit {id} n'existe pas!!");
                     return new NotFoundResult();
                 }
                 return StatusCode(200, produitDto);
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de récuperation de produit {id}, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
 
@@ -127,7 +117,7 @@ namespace MiniStore.Controllers
         {
             try
             {
-                _logger.LogInformation("Products/Add api Invoked (pour ajouter un nouveau produit) ...");
+                _logger.LogInformation($"Products/Add api Invoked (pour ajouter un nouveau produit) ...");
                 if (!ModelState.IsValid)
                 {
                     _logger.LogError("un des champs est null");
@@ -139,14 +129,11 @@ namespace MiniStore.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError("$une erreur est survenue lors de traitement de l'ajout d'un nouveau produit, avec un message de : " + e.Message);
                 return BadRequest(e);
             }
 
         }
-
-
-
 
         /// <summary>
         /// Retourne le status de l'action de produit à supprimer
@@ -165,28 +152,23 @@ namespace MiniStore.Controllers
         {
             try
             {
-                _logger.LogInformation("prodcuts/id api Invoked (pour supprimer le produit souhaité) ...");
+                _logger.LogInformation($"prodcuts/id api Invoked (pour supprimer le produit souhaité) ...");
                 var productStatus = await _productService.DeleteProduct(id);
                 if (productStatus == false)
                 {
-                    _logger.LogError("Ce produit n'existe plus !!");
-                    return BadRequest("Ce produit n'existe plus !!");
+                    _logger.LogError($"Ce produit {id} n'existe plus !!");
+                    return BadRequest($"Ce produit {id} n'existe plus !!");
                 }
                 return StatusCode(202, productStatus);
 
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de suppression, avec un message de : " + e.Message);
                 return BadRequest(e);
             }
 
         }
-
-
-
-
-
 
         /// <summary>
         /// Retourne le produit synchronisée
@@ -205,7 +187,7 @@ namespace MiniStore.Controllers
         {
             try
             {
-                _logger.LogInformation("products/id api Invoked (pour modifier  la catégorie souhaitée) ...");
+                _logger.LogInformation($"products/id api Invoked (pour modifier  la catégorie souhaitée) ...");
                 var produit = _mapper.Map<Product>(productDto);
                 var productUpdated = await _productService.UpdateProduct(id, produit);
                 return StatusCode(204, productUpdated);
@@ -213,7 +195,7 @@ namespace MiniStore.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de la modification du produit {id}, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
 

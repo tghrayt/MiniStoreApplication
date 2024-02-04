@@ -29,7 +29,7 @@ namespace MiniStore.Controllers
             _categoryService = categoryService;
             _mapper = mapper;
             _logger = logger;
-            _logger.LogInformation("Categories controller Invoked ...");
+            _logger.LogInformation($"Categories controller Invoked ...!");
         }
 
 
@@ -46,17 +46,17 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
         [HttpGet("categories")]
-        public async Task<IActionResult> GetAllCategories()
+        public async Task<ActionResult<IEnumerable<Category>>> GetAllCategories()
         {
             try
             {
-                _logger.LogInformation("Categories api Invoked (pour obtenir la liste des catégories) ...!");
+                _logger.LogInformation($"Categories api Invoked (pour obtenir la liste des catégories) ...!");
                 var categoriesTask = await _categoryService.GetAllCategories();
                 return Ok(categoriesTask);
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de récuperation des catégories, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
 
@@ -75,22 +75,22 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
         [HttpGet("categories/{id}")]
-        public async Task<IActionResult> GetCatgoryByID(int id)
+        public async Task<ActionResult<Category>> GetCatgoryByID(int id)
         {
             try
             {
-                _logger.LogInformation("Categories/id api Invoked (pour obtenir la catégorie demandée) ...");
+                _logger.LogInformation($"Categories/id api Invoked (pour obtenir la catégorie demandée) ...");
                 var categorie = await _categoryService.GetCatgoryByID(id);
                 if(categorie == null)
                 {
-                    _logger.LogError("la categorie n'existe pas!!");
+                    _logger.LogError($"la categorie n'existe pas!!");
                     return new NotFoundResult();
                 }
                 return Ok(categorie);
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de récuperation des catégories, avec un message de : " + e.Message);
                 return  new NotFoundResult();
             }
 
@@ -109,23 +109,23 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         [ProducesResponseType(typeof(void), 500)]
         [HttpPost("add")]
-        public async Task<IActionResult> AddCategory([FromBody] CategoryDto categoryDto)
+        public async Task<ActionResult<CategoryDto>> AddCategory([FromBody] CategoryDto categoryDto)
         {
             try
             {
-                _logger.LogInformation("Categorie/Add api Invoked (pour ajouter une nouvelle catégorie) ...");
+                _logger.LogInformation($"Categorie/Add api Invoked (pour ajouter une nouvelle catégorie) ...");
                 if (!ModelState.IsValid)
                 {
                     _logger.LogError("Enter a valid category name!!");
                     return BadRequest("Enter a valid category name");
                 }
                 var category = _mapper.Map<Category>(categoryDto);
-                var categoryReturne = await _categoryService.AddCategory(category);
-                return StatusCode(201, categoryReturne);
+                var returnedCategory = await _categoryService.AddCategory(category);
+                return StatusCode(201, returnedCategory);
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de l'ajout d'une nouvelle catégorie, avec un message de : " + e.Message);
                 return BadRequest(e);
             }
 
@@ -140,11 +140,11 @@ namespace MiniStore.Controllers
         /// <response code="500">Oops! le service est indisponible pour le moment</response>
         /// <exception>Déclanche une exception d'application si la catégorie n'existe pas</exception>
         // DELETE: api/Category/categories/{5}
-        [ProducesResponseType(typeof(CategoryDto), 200)]
+        [ProducesResponseType(typeof(bool), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         [ProducesResponseType(typeof(void), 500)]
         [HttpDelete("categories/{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
+        public async Task<ActionResult<bool>> DeleteCategory(int id)
         {
             try
             {
@@ -160,7 +160,7 @@ namespace MiniStore.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de suppression de la catégorie = {id}, avec un message de : " + e.Message);
                 return BadRequest(e);
             }
 
@@ -179,11 +179,11 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
         [HttpPut("categories/{id}")]
-        public async Task<IActionResult> UpdateCategory(int id , [FromBody] CategoryDto categoryDto)
+        public async Task<ActionResult<CategoryDto>> UpdateCategory(int id , [FromBody] CategoryDto categoryDto)
         {
             try
             {
-                _logger.LogInformation("Categories/id api Invoked (pour modifier  la catégorie souhaitée) ...");
+                _logger.LogInformation($"Categories/id api Invoked (pour modifier  la catégorie souhaitée) ...");
                 var category = _mapper.Map<Category>(categoryDto);
                 var categoryUpdated = await _categoryService.UpdateCategory(id,category);
                 return Ok(categoryUpdated);
@@ -191,7 +191,7 @@ namespace MiniStore.Controllers
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de modification de la catégorie = {categoryDto.CategoryId}, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
 

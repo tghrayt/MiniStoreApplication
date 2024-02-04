@@ -3,16 +3,11 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using MiniStore.Dto;
 using MiniStore.Models;
 using MiniStore.Services;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MiniStore.Controllers
@@ -38,9 +33,8 @@ namespace MiniStore.Controllers
             _mapper = mapper;
             _logger = logger;
             _configuration = configuration;
-
+            _logger.LogInformation($"users controller Invoked ...");
         }
-
 
         /// <summary>
         /// Retourne L'utilisateur enrégistré
@@ -59,13 +53,12 @@ namespace MiniStore.Controllers
         {
             try
             {
-                _logger.LogInformation("users api Invoked (pour enregistrer un nouveau utilisateur) ...");
-                //validation
+                _logger.LogInformation($"users api Invoked (pour enregistrer un nouveau utilisateur) ...");
                 userForRegisterDto.userName = userForRegisterDto.userName.ToLower();
                 if (await _userService.UserExist(userForRegisterDto.userName))
                 {
-                    _logger.LogWarning("Cet utilisateur existe déja, Veillez saisir un autre nom !");
-                    return BadRequest("Cet utilisateur existe déja, Veillez saisir un autre nom !");
+                    _logger.LogWarning($"Cet utilisateur {userForRegisterDto.userName} existe déja, Veillez saisir un autre nom !");
+                    return BadRequest($"Cet utilisateur {userForRegisterDto.userName}  existe déja, Veillez saisir un autre nom !");
                 }
                 if (!ModelState.IsValid)
                 {
@@ -78,24 +71,15 @@ namespace MiniStore.Controllers
                 };
 
                 var createdUser = await _userService.Register(userToCreate, userForRegisterDto.password);
-
-
                 return StatusCode(201, createdUser);
             }
             catch (Exception e)
             {
-                _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de l'jout d'un nouvel utilisateur {userForRegisterDto.userName}, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
 
         }
-
-
-
-
-
-
-
 
         /// <summary>
         /// Retourne le token d'utilisateur connecté
@@ -121,27 +105,9 @@ namespace MiniStore.Controllers
                 { 
                     return Unauthorized();
                 }
-                // Traitement JWT
-                var claims = new[]{
-                    new Claim(ClaimTypes.NameIdentifier,userSelected.UseryId.ToString()),
-                    new Claim(ClaimTypes.Name,userSelected.UserName)
-
-                };
-
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(claims),
-                    Expires = DateTime.Now.AddDays(1),
-                    SigningCredentials = creds
-                };
-
+                // Generate JWT Token
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.CreateToken(tokenDescriptor);
-               
-
-
+                var token = await _userService.GenerateToken(userSelected);
                 return StatusCode(200, new
                 {
                     token = tokenHandler.WriteToken(token)

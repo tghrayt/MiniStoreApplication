@@ -1,4 +1,5 @@
-﻿using MiniStore.Models;
+﻿using Microsoft.IdentityModel.Tokens;
+using MiniStore.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace MiniStore.Services
         Task<User> Login(string UserName, string Password);
 
         Task<bool> UserExist(string UserName);
+        Task<SecurityToken> GenerateToken(User user);
     }
 }
