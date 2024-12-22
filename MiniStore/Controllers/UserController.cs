@@ -12,9 +12,6 @@ using System.Threading.Tasks;
 
 namespace MiniStore.Controllers
 {
-
-
-
     [EnableCors("AllowOrigin")]
     [ApiController]
     [Route("api/[controller]")]
@@ -118,7 +115,6 @@ namespace MiniStore.Controllers
                 _logger.LogError("une erreur est survenue lors de traitement, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
-
         }
     }
 }
