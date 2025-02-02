@@ -5,13 +5,10 @@ using System.Text;
 
 public class EncryptionHelper
 {
-
-    private const string base64Key = "VtTIv2IHtY7EM3jR9Zj34/LofXN+xWbVQ4X4lZy+0rk=";
-    private const string base64Iv = "ZvN4bGg7kSPpT9yc8rD6zQ==";
-
-    // Chiffrement avec des clés en Base64
     public static string Encrypt(string plainText)
     {
+        string base64Key = Environment.GetEnvironmentVariable("BASE64_KEY");
+        string base64Iv = Environment.GetEnvironmentVariable("BASE64_IV");
         byte[] key = Convert.FromBase64String(base64Key);
         byte[] iv = Convert.FromBase64String(base64Iv);
 
@@ -35,10 +32,11 @@ public class EncryptionHelper
             }
         }
     }
-
-    // Déchiffrement avec des clés en Base64
+    
     public static string Decrypt(string cipherText)
     {
+        string base64Key = Environment.GetEnvironmentVariable("BASE64_KEY");
+        string base64Iv = Environment.GetEnvironmentVariable("BASE64_IV");
         byte[] key = Convert.FromBase64String(base64Key);
         byte[] iv = Convert.FromBase64String(base64Iv);
 
