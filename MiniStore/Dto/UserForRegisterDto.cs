@@ -11,7 +11,7 @@ namespace MiniStore.Dto
         [Required]
         public string  userName { get; set; }
         [Required]
-        [StringLength(6,MinimumLength =4,ErrorMessage ="Veillez saisir un mot de passe qui contient minimum 4 chiffres!")]
+        [StringLength(26,MinimumLength =4,ErrorMessage ="Veillez saisir un mot de passe qui contient minimum 4 chiffres!")]
         public string password { get; set; }
     }
 }

@@ -1,26 +1,20 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MiniStore.Configurations;
 using MiniStore.Context;
-using MiniStore.Repositories;
-using MiniStore.Services;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
+using MiniStore.Helper;
 
 namespace MiniStore
 {
@@ -37,7 +31,7 @@ namespace MiniStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = EncryptionHelper.Decrypt(Configuration.GetConnectionString("StoreConnStr"));
+            var connectionString = EnvirenmentVariablesHelper.GetEnvironmentVariable("connectionString");
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(connectionString));
             services.AddControllers();
             services.AddCors(options =>
