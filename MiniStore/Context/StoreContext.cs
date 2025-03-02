@@ -21,13 +21,17 @@ namespace MiniStore.Context
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<User> users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Product>()
-                .HasOne(e => e.category);
+                .HasOne(p => p.category);
+            
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.Id);
         }
+        
     }
 
 }

@@ -51,11 +51,11 @@ namespace MiniStore.Controllers
             try
             {
                 _logger.LogInformation($"users api Invoked (pour enregistrer un nouveau utilisateur) ...");
-                userForRegisterDto.userName = userForRegisterDto.userName.ToLower();
-                if (await _userService.UserExist(userForRegisterDto.userName))
+                userForRegisterDto.UserName = userForRegisterDto.UserName.ToLower();
+                if (await _userService.UserExist(userForRegisterDto.UserName))
                 {
-                    _logger.LogWarning($"Cet utilisateur {userForRegisterDto.userName} existe déja, Veillez saisir un autre nom !");
-                    return BadRequest($"Cet utilisateur {userForRegisterDto.userName}  existe déja, Veillez saisir un autre nom !");
+                    _logger.LogWarning($"Cet utilisateur {userForRegisterDto.UserName} existe déja, Veillez saisir un autre nom !");
+                    return BadRequest($"Cet utilisateur {userForRegisterDto.UserName}  existe déja, Veillez saisir un autre nom !");
                 }
                 if (!ModelState.IsValid)
                 {
@@ -64,15 +64,16 @@ namespace MiniStore.Controllers
                 }
                 var userToCreate = new User
                 {
-                    UserName = userForRegisterDto.userName
+                    UserName = userForRegisterDto.UserName,
+                    Email = userForRegisterDto.Email
                 };
 
-                var createdUser = await _userService.Register(userToCreate, userForRegisterDto.password);
+                var createdUser = await _userService.Register(userToCreate, userForRegisterDto.Password);
                 return StatusCode(201, createdUser);
             }
             catch (Exception e)
             {
-                _logger.LogError($"une erreur est survenue lors de traitement de l'jout d'un nouvel utilisateur {userForRegisterDto.userName}, avec un message de : " + e.Message);
+                _logger.LogError($"une erreur est survenue lors de traitement de l'jout d'un nouvel utilisateur {userForRegisterDto.UserName}, avec un message de : " + e.Message);
                 return new NotFoundResult();
             }
 

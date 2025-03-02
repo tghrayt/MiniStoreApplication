@@ -48,8 +48,8 @@ namespace MiniStoreTest.Controllers
 
             var userForRegisterDto = new UserForRegisterDto
             {
-                userName = "youssef",
-                password = "1234"
+                UserName = "youssef",
+                Password = "1234"
             };
             var userReturned = _userController.Register(userForRegisterDto);
             _userService.Verify(x => x.Register(It.IsAny<User>(), It.IsAny<string>()), Times.Once);

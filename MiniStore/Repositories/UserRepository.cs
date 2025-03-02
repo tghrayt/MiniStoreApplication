@@ -18,7 +18,7 @@ namespace MiniStore.Repositories
         }
         public async Task<User> Login(string UserName, string Password)
         {
-            var user =  _storeContext.users.FirstOrDefault(u=>u.UserName==UserName);
+            var user =  _storeContext.Users.FirstOrDefault(u=>u.UserName==UserName);
             if(user == null)  return null;
             if (! await UserHelper.VerfyPasswordHash(Password, user.PasswordHash, user.PasswordSalt))
             {
@@ -33,14 +33,14 @@ namespace MiniStore.Repositories
             UserHelper.CreatePasswordHash(password, out PasswordHash, out PasswordSalt);
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
-            await _storeContext.users.AddAsync(user);
+            await _storeContext.Users.AddAsync(user);
             await _storeContext.SaveChangesAsync();
             return user;
         }
 
         public async Task<bool> UserExist(string UserName)
         {
-            if( _storeContext.users.Any(u => u.UserName == UserName))
+            if( _storeContext.Users.Any(u => u.UserName == UserName))
             {
                 return true;
             }

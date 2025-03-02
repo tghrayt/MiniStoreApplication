@@ -14,6 +14,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using MiniStore.Dto;
 using MiniStore.Helper;
 
 namespace MiniStore
@@ -31,8 +32,9 @@ namespace MiniStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = EnvirenmentVariablesHelper.GetEnvironmentVariable("connectionString");
-            services.AddDbContext<StoreContext>(options => options.UseSqlServer(connectionString));
+            // var connectionString = EnvirenmentVariablesHelper.GetEnvironmentVariable("connectionString");
+            // services.AddDbContext<StoreContext>(options => options.UseSqlServer(connectionString));
+            DataBaseConfig.CreateMemoryDataBase(services);
             services.AddControllers();
             services.AddCors(options =>
             {
@@ -103,6 +105,8 @@ namespace MiniStore
 
 
         }
+
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

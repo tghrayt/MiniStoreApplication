@@ -25,7 +25,7 @@ namespace MiniStore.Services
         {
             var claims = new[] 
             {
-                new Claim(ClaimTypes.NameIdentifier, userSelected.UseryId.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userSelected.Id.ToString()),
                 new Claim(ClaimTypes.Name, userSelected.UserName)
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));

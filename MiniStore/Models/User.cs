@@ -10,10 +10,9 @@ namespace MiniStore.Models
     [Table("User")]
     public class User
     {
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UseryId { get; set; }
+        public Guid Id { get; }
 
         public string UserName { get; set; }
 

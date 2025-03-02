@@ -9,9 +9,15 @@ namespace MiniStore.Dto
     public class UserForRegisterDto
     {
         [Required]
-        public string  userName { get; set; }
+        public string  UserName { get; set; }
+        
         [Required]
         [StringLength(26,MinimumLength =4,ErrorMessage ="Veillez saisir un mot de passe qui contient minimum 4 chiffres!")]
-        public string password { get; set; }
+        public string Password { get; init; }
+        
+        [EmailAddress]
+        [Required]
+        public string Email { get; init; }
+        
     }
 }
