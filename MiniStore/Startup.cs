@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,13 +8,10 @@ using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using MiniStore.Configurations;
-using MiniStore.Context;
 using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
-using MiniStore.Dto;
-using MiniStore.Helper;
 
 namespace MiniStore
 {
@@ -28,8 +24,6 @@ namespace MiniStore
 
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // var connectionString = EnvirenmentVariablesHelper.GetEnvironmentVariable("connectionString");
@@ -50,7 +44,6 @@ namespace MiniStore
             });
             services.AddAutoMapper(typeof(Startup));
             services.DependencyInjectionConfig();
-
             services.AddSwaggerGen(s =>
             {
                 s.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -62,7 +55,6 @@ namespace MiniStore
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 s.IncludeXmlComments(xmlPath);
-
                 s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,

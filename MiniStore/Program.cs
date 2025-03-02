@@ -4,8 +4,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 using System.IO;
-using System.Security.Cryptography;
-using MiniStore.Helper;
 
 namespace MiniStore
 {
@@ -20,14 +18,11 @@ namespace MiniStore
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+                .ConfigureLogging(option =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                })
-            .ConfigureLogging(option =>
-            {
-                option.ClearProviders();
-                option.SetMinimumLevel(LogLevel.Trace);
-            }).UseNLog();
+                    option.ClearProviders();
+                    option.SetMinimumLevel(LogLevel.Trace);
+                }).UseNLog();
     }
 }
