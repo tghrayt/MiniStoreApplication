@@ -4,7 +4,7 @@ using MiniStore.Context;
 using MiniStore.Helper;
 using MiniStore.Models;
 
-namespace MiniStore;
+namespace MiniStore.Configurations;
 
 public class DataBaseConfig
 {

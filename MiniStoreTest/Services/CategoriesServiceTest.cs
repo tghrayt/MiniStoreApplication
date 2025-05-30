@@ -8,7 +8,6 @@ using MiniStore.Repositories;
 using MiniStore.Services;
 using MiniStoreTest.Helper;
 using Moq;
-using Nest;
 using System;
 using System.Collections.Generic;
 using System.Linq;

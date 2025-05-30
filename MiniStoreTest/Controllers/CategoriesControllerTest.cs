@@ -1,5 +1,4 @@
 using AutoMapper;
-using Elasticsearch.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,6 @@ using MiniStore.Models;
 using MiniStore.Services;
 using MiniStoreTest.Helper;
 using Moq;
-using Nest;
 using Xunit;
 
 namespace MiniStoreTest.Controllers
