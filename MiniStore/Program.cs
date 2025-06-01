@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using MiniStore;
 using MiniStore.Configurations;
 using Serilog;
 using System;
@@ -15,17 +14,17 @@ using System.Reflection;
 using System.Text;
 
 
-// 1. Configurer Serilog avant tout
+#region Serilog Configuration
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
 services.LogManagementConfig();
 builder.Host.UseSerilog();
 
+#endregion
 
 
-
-// 2. Services (ex-ConfigureServices)
+#region Configuration Initialization
 DataBaseConfig.CreateMemoryDataBase(services);
 services.AddControllers();
 services.AddCors(options =>
@@ -91,10 +90,9 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+#endregion
 
-// 3. Middleware et endpoints (ex-Configure)
-
-
+#region Middleware and Endpoints
 var app = builder.Build();
 var env = builder.Environment;
 
@@ -123,3 +121,5 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 app.Run();
+
+#endregion

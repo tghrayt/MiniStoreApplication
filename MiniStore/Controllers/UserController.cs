@@ -20,16 +20,12 @@ namespace MiniStore.Controllers
     {
 
         private readonly IUserService _userService;
-        private readonly IMapper _mapper;
-        private readonly IConfiguration _configuration;
         private readonly ILogger<UserController> _logger;
 
         public UserController(IUserService userService, IMapper mapper, ILogger<UserController> logger, IConfiguration configuration)
         {
             _userService = userService;
-            _mapper = mapper;
             _logger = logger;
-            _configuration = configuration;
             _logger.LogInformation($"users controller Invoked ...");
         }
 
