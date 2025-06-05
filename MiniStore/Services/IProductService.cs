@@ -8,7 +8,7 @@ namespace MiniStore.Services
 {
     public interface IProductService 
     {
-        public IEnumerable<Product> GetAllProducts();
+        public Task<IEnumerable<Product>> GetAllProducts();
         public Task<Product> GetProductByID(int productId);
         public Task<bool> DeleteProduct(int productId);
         public Task<Product> AddProduct(Product product);

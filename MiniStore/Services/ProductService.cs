@@ -37,9 +37,9 @@ namespace MiniStore.Services
             return await _productRepository.DeleteProduct(productId);
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            return _productRepository.GetAllProducts();
+            return await _productRepository.GetAllProducts();
         }
 
         public async Task<Product> GetProductByID(int productId)

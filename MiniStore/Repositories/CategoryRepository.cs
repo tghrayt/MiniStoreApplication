@@ -27,9 +27,6 @@ namespace MiniStore.Repositories
             return category;
         }
 
-
-
-
         public async Task<bool> DeleteCategory(int categoryId)
         {
             var category = await _storeContext.Categories.FindAsync(categoryId);
@@ -49,9 +46,6 @@ namespace MiniStore.Repositories
             return true;
         }
 
-
-
-
         public async Task<IEnumerable<Category>> GetAllCategories()
         {
             return await _storeContext.Categories.ToListAsync();
@@ -63,9 +57,6 @@ namespace MiniStore.Repositories
         {
             return await _storeContext.Categories.FindAsync(categoryId);
         }
-
-
-
 
         public async Task<Category> UpdateCategory(int categoryId, Category category)
         {
@@ -80,7 +71,5 @@ namespace MiniStore.Repositories
 
             return categoryToUpdate;
         }
-
-
     }
 }

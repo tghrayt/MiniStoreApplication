@@ -43,12 +43,12 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
         [HttpGet("products")]
-        public ActionResult<IEnumerable<Product>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllProducts()
         {
             try
             {
                 _logger.LogInformation($"products api Invoked (pour obtenir la liste des produits) ...");
-                var products = _productService.GetAllProducts();
+                var products = await _productService.GetAllProducts();
                 return StatusCode(200, products);
             }
             catch (Exception e)

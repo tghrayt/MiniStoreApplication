@@ -42,9 +42,9 @@ namespace MiniStore.Repositories
             return true;
         }
 
-        public IEnumerable<Product> GetAllProducts()
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            return _storeContext.Products.Include(product => product.category).ToList();
+            return await _storeContext.Products.Include(product => product.category).ToListAsync();
         }
 
         public async Task<Product> GetProductByID(int productId)
