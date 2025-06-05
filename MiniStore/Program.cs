@@ -1,15 +1,11 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using MiniStore.Configurations;
 using Scalar.AspNetCore;
 using Serilog;
-using System;
-using System.Text;
 using System.Threading.Tasks;
 
 
@@ -27,18 +23,7 @@ builder.Host.UseSerilog();
 #region Configuration Initialization
 DataBaseConfiguration.CreateMemoryDataBase(services);
 services.AddControllers();
-services.AddCors(options =>
-{
-    options.AddPolicy(
-        name: "AllowOrigin",
-        builder =>
-        {
-            builder.WithOrigins("https://localhost:44351", "http://localhost:4200", "http://localhost:7183")
-                                .AllowAnyHeader()
-                                .AllowAnyMethod()
-                                .AllowCredentials();
-        });
-});
+services.AddCorsConfiguration();
 services.AddAutoMapper(typeof(Program));
 services.DependencyInjectionConfig();
 services.JwtConfig();
@@ -61,20 +46,20 @@ if (env.IsDevelopment())
         context.Response.Redirect("/scalar", permanent: false);
         return Task.CompletedTask;
     });
+    app.UseCors("AllowOrigin");
 }
 if (env.IsProduction())
 {
     app.UseAuthentication();
-    app.UseAuthorization();
+    app.UseCors("AllowProductionFront");
 }
 
 app.UseRouting();
-app.UseCors("AllowOrigin");
+app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-
 app.Run();
 
 #endregion
