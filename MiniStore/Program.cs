@@ -8,8 +8,6 @@ using Scalar.AspNetCore;
 using Serilog;
 using System.Threading.Tasks;
 
-
-
 #region Serilog Configuration
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -18,7 +16,6 @@ services.LogManagementConfig();
 builder.Host.UseSerilog();
 
 #endregion
-
 
 #region Configuration Initialization
 DataBaseConfiguration.CreateMemoryDataBase(services);
@@ -56,10 +53,7 @@ if (env.IsProduction())
 
 app.UseRouting();
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
+app.MapControllers();
 app.Run();
 
 #endregion
