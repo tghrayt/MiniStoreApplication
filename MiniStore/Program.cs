@@ -5,13 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using MiniStore.Configurations;
+using Scalar.AspNetCore;
 using Serilog;
 using System;
-using System.IO;
-using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
+
 
 
 #region Serilog Configuration
@@ -41,41 +41,6 @@ services.AddCors(options =>
 });
 services.AddAutoMapper(typeof(Program));
 services.DependencyInjectionConfig();
-services.AddSwaggerGen(s =>
-{
-    s.SwaggerDoc("V1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Version = "V1",
-        Title = "MiniStore API",
-        Description = "Api for managing a mini store"
-    });
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    s.IncludeXmlComments(xmlPath);
-    s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        In = ParameterLocation.Header,
-        Description = "Please enter a valid token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "Bearer"
-    });
-    s.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type=ReferenceType.SecurityScheme,
-                                Id="Bearer"
-                            }
-                        },
-                        new string[]{}
-                    }
-                });
-});
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -93,6 +58,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 #endregion
 
 #region Middleware and Endpoints
+OpenApiConfiguration.AddOpenApiWithCustomSchema(builder);
 var app = builder.Build();
 var env = builder.Environment;
 
@@ -100,6 +66,13 @@ if (env.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     IdentityModelEventSource.ShowPII = true;
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+    app.MapGet("/", context =>
+    {
+        context.Response.Redirect("/scalar", permanent: false);
+        return Task.CompletedTask;
+    });
 }
 if (env.IsProduction())
 {
@@ -114,12 +87,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
 });
-app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("swagger/V1/swagger.json", "Ministore Api V1");
-    c.RoutePrefix = string.Empty;
-});
+
 app.Run();
 
 #endregion
