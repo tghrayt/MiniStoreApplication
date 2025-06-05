@@ -12,10 +12,8 @@ using System.Threading.Tasks;
 
 namespace MiniStore.Controllers
 {
-    [EnableCors("AllowOrigin")]
     [ApiController]
     [Route("api/[controller]")]
-    [Produces("application/json")]
     public class UserController : ControllerBase
     {
 

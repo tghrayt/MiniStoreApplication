@@ -6,7 +6,7 @@ using MiniStore.Models;
 
 namespace MiniStore.Configurations;
 
-public class DataBaseConfig
+public class DataBaseConfiguration
 {
     public static void CreateMemoryDataBase(IServiceCollection services)
     {

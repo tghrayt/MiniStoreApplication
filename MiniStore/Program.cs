@@ -25,7 +25,7 @@ builder.Host.UseSerilog();
 
 
 #region Configuration Initialization
-DataBaseConfig.CreateMemoryDataBase(services);
+DataBaseConfiguration.CreateMemoryDataBase(services);
 services.AddControllers();
 services.AddCors(options =>
 {
@@ -41,19 +41,7 @@ services.AddCors(options =>
 });
 services.AddAutoMapper(typeof(Program));
 services.DependencyInjectionConfig();
-services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes
-            (Environment.GetEnvironmentVariable("JWT_TOKEN_CONFIGURATION")) // Fix: Use initialized Configuration  
-            ),
-            ValidateIssuer = false,
-            ValidateAudience = false
-        };
-    });
+services.JwtConfig();
 
 #endregion
 
@@ -76,13 +64,12 @@ if (env.IsDevelopment())
 }
 if (env.IsProduction())
 {
-    // Production code ....!
+    app.UseAuthentication();
+    app.UseAuthorization();
 }
 
-app.UseAuthentication();
 app.UseRouting();
 app.UseCors("AllowOrigin");
-app.UseAuthorization();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();

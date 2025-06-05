@@ -14,11 +14,8 @@ namespace MiniStore.Controllers
 {
 
 
-    [EnableCors("AllowOrigin")]
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    [Produces("application/json")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -45,7 +42,6 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(IEnumerable<Product>), 200)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
-        [AllowAnonymous]
         [HttpGet("products")]
         public ActionResult<IEnumerable<Product>> GetAllProducts()
         {
@@ -75,7 +71,6 @@ namespace MiniStore.Controllers
         [ProducesResponseType(typeof(ProductDto), 200)]
         [ProducesResponseType(typeof(NotFoundResult), 404)]
         [ProducesResponseType(typeof(void), 500)]
-        [AllowAnonymous]
         [HttpGet("products/{id}")]
         public async Task<ActionResult<ProductDto>> GetProductByID(int id)
         {

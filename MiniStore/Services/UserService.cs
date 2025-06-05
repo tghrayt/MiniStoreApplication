@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MiniStore.Helper;
 using MiniStore.Models;
 using MiniStore.Repositories;
 using System;
@@ -26,12 +27,15 @@ namespace MiniStore.Services
             var claims = new[] 
             {
                 new Claim(ClaimTypes.NameIdentifier, userSelected.Id.ToString()),
-                new Claim(ClaimTypes.Name, userSelected.UserName)
+                new Claim(ClaimTypes.Name, userSelected.UserName),
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(EnvirenmentVariablesHelper.GetEnvironmentVariable("JWT_TOKEN_CONFIGURATION")));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                Issuer = "youssef-api",
+                Audience = "youssef-client",
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = creds
