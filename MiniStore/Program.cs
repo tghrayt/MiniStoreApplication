@@ -18,7 +18,8 @@ builder.Host.UseSerilog();
 #endregion
 
 #region Configuration Initialization
-DataBaseConfiguration.CreateMemoryDataBase(services);
+
+services.CreatePostGreSqlDataBase();
 services.AddControllers();
 services.AddCorsConfiguration();
 services.AddAutoMapper(typeof(Program));

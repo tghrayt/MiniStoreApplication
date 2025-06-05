@@ -1,22 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MiniStore.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MiniStore.Context
 {
     public class StoreContext : DbContext
     {
-        public StoreContext(DbContextOptions options)
-            : base(options)
+        public StoreContext(DbContextOptions<StoreContext> options) : base(options)
         {
-
-        }
-
-        public StoreContext()
-        { 
         }
 
         public DbSet<Category> Categories { get; set; }

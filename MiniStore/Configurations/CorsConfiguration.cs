@@ -4,7 +4,7 @@ namespace MiniStore.Configurations
 {
     public static class CorsConfiguration
     {
-        public static void AddCorsConfiguration(this IServiceCollection services)
+        public static IServiceCollection AddCorsConfiguration(this IServiceCollection services)
         {
             services.AddCors(
                 options =>
@@ -33,6 +33,8 @@ namespace MiniStore.Configurations
                     );
                 }
             );
+
+            return services;
         }
     }
 

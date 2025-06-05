@@ -6,13 +6,14 @@ using MiniStore.Models;
 
 namespace MiniStore.Configurations;
 
-public class DataBaseConfiguration
+public static class DataBaseConfiguration
 {
-    public static void CreateMemoryDataBase(IServiceCollection services)
+    public static IServiceCollection CreateMemoryDataBase(this IServiceCollection services)
     {
         services.AddDbContext<StoreContext>(options =>
             options.UseInMemoryDatabase("StoreDB"));
         UsersInit(services);
+        return services;
     }
     private static void UsersInit(IServiceCollection services)
     {
@@ -27,5 +28,13 @@ public class DataBaseConfiguration
             context.Users.Add(user);
             context.SaveChanges();
         }
+    }
+
+    public static IServiceCollection CreatePostGreSqlDataBase(this IServiceCollection services)
+    {
+        var connectionString = EnvirenmentVariablesHelper.GetEnvironmentVariable("POSTGRESQL_CONNECTION_STRING");
+        services.AddDbContext<StoreContext>(options =>
+            options.UseNpgsql(connectionString));
+        return services;
     }
 }
