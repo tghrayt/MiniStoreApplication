@@ -373,6 +373,8 @@ FodyWeavers.xsd
 
 # dependencies
 /node_modules
+/.angular
+.angular/
 
 # profiling files
 chrome-profiler-events*.json

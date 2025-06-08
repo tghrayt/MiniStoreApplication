@@ -21,8 +21,8 @@ namespace MiniStore.Configurations
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                //.MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-                //.MinimumLevel.Override("System", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+                .MinimumLevel.Override("System", LogEventLevel.Warning)
                 .WriteTo.Console()
                 .WriteTo.Http(
                     requestUri: Environment.GetEnvironmentVariable("LOGTAIL_REQUEST_URI"),

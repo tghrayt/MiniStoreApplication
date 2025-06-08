@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/Product';
@@ -13,7 +13,7 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AdminComponent implements OnInit {
 
-  form!: FormGroup;
+  form!: UntypedFormGroup;
   public listProduct : Product[] = [];
   public listCategory : Category[] = [];
   private urlWebService : string ='';

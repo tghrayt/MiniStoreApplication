@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
 
   private urlWebService : string ='User/login';
   private user : User = new User();
-  userName = new FormControl();
-  password = new FormControl();
+  userName = new UntypedFormControl();
+  password = new UntypedFormControl();
   constructor(public userService: LoginService,public router: Router) { }
 
   ngOnInit(): void {
